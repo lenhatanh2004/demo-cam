@@ -196,7 +196,7 @@
       </div>
       <div>
         <label>Mã camera</label>
-        <input type="text" id="codeInput" placeholder="VD: cam1" maxlength="30">
+        <input type="text" id="codeInput" placeholder="VD: cam1 hoặc id camera trong KinderLog" maxlength="64">
       </div>
     </div>
 
@@ -257,8 +257,10 @@ function toast(msg, ms=2500){
   t._tm = setTimeout(()=> t.style.display='none', ms);
 }
 
+// Mã camera = phần sau tiền tố CAM_PREFIX; dán cả peer id đầy đủ (meetnow-cam-...) cũng được, tiền tố sẽ bị bỏ
 function sanitizeCode(v){
-  return (v||'').toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'').replace(/^-+|-+$/g,'');
+  return (v||'').toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')
+    .replace(/^(meetnow-cam-)+/,'').replace(/^-+|-+$/g,'');
 }
 
 function loadSettings(){
